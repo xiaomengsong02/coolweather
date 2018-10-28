@@ -3,12 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
+    <!--背景图片，因为外层使用的是 帧布局：没特别说明，所以布局都会在左上角显示-->
     <ImageView
         android:id="@+id/bing_pic_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
 
+    <!--在整个显示主页的布局中加入侧滑菜单：该布局必须包含两个子控件-->
+    <!--第一个子控件：显示主活动内容-->
+    <!--第二个子控件：显示侧滑菜单内容-->
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layou"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <!--下拉刷新控件-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!--被下拉刷新控件包裹的内容，就是需要更新的-->
     <ScrollView
         android:id="@+id/weather_layout"
         android:layout_width="match_parent"
@@ -33,5 +50,19 @@
 
 
     </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+        <!--第二个控件：现实的是策划内容-->
+        <!--引入碎片-->
+        <fragment
+            android:id="@+id/choose_area_fragment"
+            android:name="com.coolweather.android.ChooseAreaFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"/>
+        <!-- layout_gravity="start" 使用系统语言默认的滑动模式 -->
+
+
+    </android.support.v4.widget.DrawerLayout>
 
 </FrameLayout>

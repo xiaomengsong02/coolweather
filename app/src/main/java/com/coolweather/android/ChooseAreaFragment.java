@@ -135,11 +135,21 @@ public class ChooseAreaFragment extends Fragment {
 
                 }else if(currentLevel==LEVEL_COUNTY){
                     String weatherId=countyList.get(position).getWeatherId();
-                    Intent intent=new Intent(getActivity(),WeatherActivity.class);
+                    if(getActivity() instanceof MainActivity){
+                        Intent intent=new Intent(getActivity(),WeatherActivity.class);
+                        intent.putExtra("weather_id",weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if(getActivity() instanceof WeatherActivity){
+                        WeatherActivity activity=(WeatherActivity)getActivity();
+                        //关闭侧滑菜单
+                        activity.drawerLayout.closeDrawers();
+                        //显示刷新进度条
+                        activity.swipeRefresh.setRefreshing(true);
+                        //去服务器查询天气信息
+                        activity.requestWeather(weatherId);
+                    }
 
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
                 }
             }
         });
