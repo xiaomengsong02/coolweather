@@ -120,7 +120,7 @@ public class Utility {
 
             //获取数组中的第一个对象，并转换成字符串
             String weatherContent=jsonArray.getJSONObject(0).toString();
-
+            LogUtil.d("Utility","解析后的数据: "+weatherContent);
             //解析一段JSON数据的标准写法
             return new Gson().fromJson(weatherContent,Weather.class);
 
